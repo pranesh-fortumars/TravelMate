@@ -1,0 +1,6 @@
+{
+  "name": "TravelMate",
+  "description": "Your Budget. Your Journey. Your India. AI-powered travel planner, live navigation, and group expense companion.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
