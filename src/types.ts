@@ -66,6 +66,38 @@ export interface TransitOption {
   badge?: string;
 }
 
+export interface UserProfile {
+  id: string;
+  name: string;
+  handle: string;
+  email: string;
+  phone: string;
+  photo: string;
+  authProvider: 'email' | 'google' | 'phone';
+  isLoggedIn: boolean;
+  preferredLanguage: string;
+  homeCity: string;
+  tripStyle: 'Budget Backpacker' | 'Balanced Explorer' | 'Cultural Seeker' | 'Comfort Trekker';
+  foodPreference: 'Strict Vegetarian' | 'Vegetarian & Egg' | 'Non-Vegetarian' | 'Jain (No Root Veg)' | 'Vegan';
+  accessibility: 'None Required' | 'Wheelchair Friendly' | 'Low Slope & Handrails' | 'Senior Friendly';
+  savedPlaces: string[];
+  savedTripsCount: number;
+  completedTripsCount: number;
+  medicalId: {
+    bloodGroup: string;
+    allergies: string;
+    emergencyContactName: string;
+    emergencyContactPhone: string;
+    isOrganDonor: boolean;
+  };
+  notifications: {
+    weatherAlerts: boolean;
+    budgetThresholds: boolean;
+    tatkalPings: boolean;
+    convoyRelays: boolean;
+  };
+}
+
 export interface DestinationCard {
   id: string;
   title: string;
@@ -81,6 +113,12 @@ export interface DestinationCard {
   tags: string[];
   isMonsoonPick?: boolean;
   isEcoCertified?: boolean;
+  // Detailed info
+  overview?: string;
+  topAttractions?: string[];
+  localFoodSpecialties?: string[];
+  culturalEtiquette?: string[];
+  safetyNotes?: string[];
 }
 
 export interface TripBudgetAllocation {
@@ -97,6 +135,9 @@ export interface ActiveTrip {
   subtitle: string;
   origin: string;
   destination: string;
+  routeStops?: string[];
+  travelPace?: 'Relaxed' | 'Balanced' | 'Fast-Paced';
+  groupType?: 'Solo' | 'Couple' | 'Friends' | 'Family' | 'College Batch';
   daysTotal: number;
   currentDay: number;
   travellersCount: number;

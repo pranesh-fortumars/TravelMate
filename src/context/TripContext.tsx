@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { ActiveTrip, ActiveTab, Expense, Settlement, ItineraryActivity } from '../types';
-import { INITIAL_ACTIVE_TRIP } from '../data/mockData';
+import { ActiveTrip, ActiveTab, Expense, Settlement, ItineraryActivity, UserProfile, DestinationCard } from '../types';
+import { INITIAL_ACTIVE_TRIP, INITIAL_USER_PROFILE, DESTINATIONS } from '../data/mockData';
 
 interface ToastState {
   message: string;
@@ -38,12 +38,83 @@ interface TripContextType {
   toggleRerouteActivity: (accepted: boolean) => void;
   addPitstop: (title: string, cost: number, location: string) => void;
   updateBudget: (newBudget: number) => void;
+  // User Profile
+  userProfile: UserProfile;
+  updateUserProfile: (updates: Partial<UserProfile>) => void;
+  // Destinations
+  savedDestinationIds: string[];
+  toggleSaveDestination: (destId: string) => void;
+  selectedDestination: DestinationCard | null;
+  setSelectedDestination: (dest: DestinationCard | null) => void;
+  // Trips
+  savedTrips: ActiveTrip[];
+  createNewTrip: (newTrip: ActiveTrip) => void;
+  switchActiveTrip: (tripId: string) => void;
 }
 
 const TripContext = createContext<TripContextType | undefined>(undefined);
 
 export const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [trip, setTrip] = useState<ActiveTrip>(INITIAL_ACTIVE_TRIP);
+  const [savedTrips, setSavedTrips] = useState<ActiveTrip[]>([
+    INITIAL_ACTIVE_TRIP,
+    {
+      id: 'hampi-heritage-2026',
+      title: 'Hampi Vijayanagara Trail',
+      subtitle: 'Boulders & Coracles • 3 Days',
+      origin: 'Bengaluru',
+      destination: 'Hampi, Karnataka',
+      daysTotal: 3,
+      currentDay: 1,
+      travellersCount: 4,
+      totalBudget: 8500,
+      spentBudget: 0,
+      remainingBuffer: 8500,
+      burnVelocityDaily: 2833,
+      status: 'upcoming',
+      coverImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBEiBuvW_MqMSkp5gcSuDtOvUmW3SHn5df6_RFwIIlrxetNSMvcDJcNefnjA3YYR-ePTXuoXwbZMfquXHSsVFbJaDm1Na9AkQ0MvFxf9k15LFzVyIoSXXxQY3asqAFOy62b2z0NQ7tScsEoAS5Y5nhBfdDP9DpDLoo1HcUjfqFwfh_PooM6DQAxieQurmuDj28eGToxFJd3OrAGymsgXKa8SXdb_vMxYtBcKxLj4izczLz3JL8_fqS1',
+      weather: {
+        temp: '28°C',
+        condition: 'Clear Skies',
+        rainProbability: '5%',
+        dryWindowUntil: 'All Day',
+      },
+      allocations: {
+        transport: 2200,
+        stays: 2800,
+        food: 1800,
+        experiences: 1000,
+        safetyBuffer: 700,
+      },
+      members: [
+        { id: 'm1', name: 'Ananya Sen', shortCode: 'AN', paidTotal: 0, share: 2125, balance: 0, isYou: true },
+        { id: 'm2', name: 'Vikram Joshi', shortCode: 'VK', paidTotal: 0, share: 2125, balance: 0, isYou: false },
+        { id: 'm3', name: 'Rahul Sharma', shortCode: 'RA', paidTotal: 0, share: 2125, balance: 0, isYou: false },
+        { id: 'm4', name: 'Sneha Nair', shortCode: 'SN', paidTotal: 0, share: 2125, balance: 0, isYou: false },
+      ],
+      expenses: [],
+      settlements: [],
+      itinerary: [
+        {
+          id: 'h-1',
+          dayNumber: 1,
+          time: '06:30 AM',
+          duration: '1 hr',
+          title: 'Sunrise on Matanga Hill',
+          description: 'Panoramic view over Achyutaraya Temple & banana groves.',
+          category: 'Sightseeing',
+          cost: 0,
+          isFree: true,
+          location: 'Matanga Hill, Hampi',
+        },
+      ],
+    },
+  ]);
+
+  const [userProfile, setUserProfile] = useState<UserProfile>(INITIAL_USER_PROFILE);
+  const [savedDestinationIds, setSavedDestinationIds] = useState<string[]>(['munnar', 'hampi']);
+  const [selectedDestination, setSelectedDestination] = useState<DestinationCard | null>(null);
+
   const [activeTab, setActiveTab] = useState<ActiveTab>('home');
   const [isAskAiOpen, setIsAskAiOpen] = useState(false);
   const [isLogExpenseOpen, setIsLogExpenseOpen] = useState(false);
@@ -68,6 +139,40 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setTimeout(() => {
       setToast(prev => ({ ...prev, visible: false }));
     }, 3200);
+  };
+
+  const updateUserProfile = (updates: Partial<UserProfile>) => {
+    setUserProfile(prev => ({ ...prev, ...updates }));
+    showToast('Profile preferences updated ✓');
+  };
+
+  const toggleSaveDestination = (destId: string) => {
+    setSavedDestinationIds(prev => {
+      const exists = prev.includes(destId);
+      if (exists) {
+        showToast('Removed from Saved Wishlist');
+        return prev.filter(id => id !== destId);
+      } else {
+        showToast('Added to Saved Wishlist ❤️');
+        return [...prev, destId];
+      }
+    });
+  };
+
+  const createNewTrip = (newTrip: ActiveTrip) => {
+    setTrip(newTrip);
+    setSavedTrips(prev => [newTrip, ...prev]);
+    setActiveTab('itinerary');
+    showToast(`Created "${newTrip.title}" successfully!`);
+  };
+
+  const switchActiveTrip = (tripId: string) => {
+    const found = savedTrips.find(t => t.id === tripId);
+    if (found) {
+      setTrip(found);
+      setActiveTab('home');
+      showToast(`Switched to "${found.title}"`);
+    }
   };
 
   const logNewExpense = (newExpData: Omit<Expense, 'id' | 'timestamp'>) => {
@@ -187,6 +292,15 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         toggleRerouteActivity,
         addPitstop,
         updateBudget,
+        userProfile,
+        updateUserProfile,
+        savedDestinationIds,
+        toggleSaveDestination,
+        selectedDestination,
+        setSelectedDestination,
+        savedTrips,
+        createNewTrip,
+        switchActiveTrip,
       }}
     >
       {children}

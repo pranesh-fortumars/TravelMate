@@ -1,6 +1,6 @@
 {
   "name": "TravelMate",
-  "description": "Your Budget. Your Journey. Your India. AI-powered travel planner, live navigation, and group expense companion.",
-  "requestFramePermissions": [],
+  "description": "Complete AI travel planning, immersive 3D terrain exploration, live turn-by-turn navigation, group expenses ledger, and offline emergency safety platform for India.",
+  "requestFramePermissions": ["geolocation"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

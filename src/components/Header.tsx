@@ -52,7 +52,7 @@ export const Header: React.FC<HeaderProps> = ({ title, showBack }) => {
             <span className="hidden sm:inline">Play Store</span>
           </button>
 
-          {activeTab === 'livenav' || activeTab === '3dmap' ? (
+          {activeTab === 'livenav' || activeTab === 'map3d' ? (
             <button
               onClick={() => setActiveTab('sos')}
               className="h-8 px-2.5 rounded-full bg-[#93000a] text-[#ffdad6] flex items-center gap-1 hover:opacity-90 active:scale-95 transition-all shadow-md border border-[#ffb4ab]/30 animate-pulse"

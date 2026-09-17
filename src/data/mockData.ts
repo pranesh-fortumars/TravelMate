@@ -1,4 +1,36 @@
-import { ActiveTrip, DestinationCard, TransitOption } from '../types';
+import { ActiveTrip, DestinationCard, TransitOption, UserProfile } from '../types';
+
+export const INITIAL_USER_PROFILE: UserProfile = {
+  id: 'usr_ananya_01',
+  name: 'Ananya Sen',
+  handle: '@ananya_voyager',
+  email: 'ananya.sen@voyager.in',
+  phone: '+91 98450 12894',
+  photo: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCgVY8E2xef1vTObS-Qs3h9-gp51lbIZrlStpx7B98vhotYDrTXoJhh5aw0P-JG3YtJPJq3HfmXsyWwbPUvcE6fqg_Bsfi6c76LqKy11Hg7z5ydrvLB2BOs-VL3x-sHEM5-_dxYVssE5qiQGU3NfoY16LIhm1AWw5Bor2D5bqTsnqtWkFMkX6y8dcwEJAxSd9qDi55X3pjDd1KBFdbag-okh8FA14jFbK2BePI16hpbTIMxptfJpdVr',
+  authProvider: 'google',
+  isLoggedIn: true,
+  preferredLanguage: 'English',
+  homeCity: 'Bengaluru, Karnataka',
+  tripStyle: 'Balanced Explorer',
+  foodPreference: 'Strict Vegetarian',
+  accessibility: 'None Required',
+  savedPlaces: ['Vattavada Strawberry Trails', 'Meesapulimala Peak Trek', 'Marayoor Sandalwood Forest', 'Dhanushkodi Ghost Town'],
+  savedTripsCount: 4,
+  completedTripsCount: 14,
+  medicalId: {
+    bloodGroup: 'O+ Positive',
+    allergies: 'Mild Peanut / Asthmatics Inhaler in Daypack',
+    emergencyContactName: 'Col. Rajesh Sen (Father)',
+    emergencyContactPhone: '+91 98451 99011',
+    isOrganDonor: true,
+  },
+  notifications: {
+    weatherAlerts: true,
+    budgetThresholds: true,
+    tatkalPings: true,
+    convoyRelays: true,
+  },
+};
 
 export const INITIAL_ACTIVE_TRIP: ActiveTrip = {
   id: 'munnar-expedition-2026',
@@ -291,6 +323,18 @@ export const DESTINATIONS: DestinationCard[] = [
     tags: ['Mountains', 'Tea Estates', '4x4 Trails', 'Nature'],
     isMonsoonPick: true,
     isEcoCertified: true,
+    overview: 'Perched 1,600m up in the Western Ghats, Munnar is renowned for rolling green tea plantations, rare Nilgiri Tahr wildlife, misty mountain passes along Gap Road, and cool mountain rivers.',
+    topAttractions: ['Eravikulam National Park', 'Lock Heart Gap Pass', 'KDHP Tea Museum', 'Mattupetty Reservoir', 'Top Station Ridge'],
+    localFoodSpecialties: ['Kerala Appam with Vegetable Stew', 'Hot Cardamom Mountain Tea', 'Malabar Parotta & Kadala Curry', 'Stream-fresh Karimeen (optional)'],
+    culturalEtiquette: [
+      'Respect delicate tea estate plants; stick to marked pedestrian pathways.',
+      'Responsible tourism: zero single-use plastic in Shola eco-sanctuaries.',
+      'Strictly avoid substance abuse, narcotics, or unregulated night parties on forest borders.',
+    ],
+    safetyNotes: [
+      'Monsoon fog can reduce visibility to <10 meters on SH-17; use fog lamps and honk on hairpins.',
+      'Carry light rain poncho and leech socks during monsoon plantation walks.',
+    ],
   },
   {
     id: 'hampi',
@@ -305,6 +349,18 @@ export const DESTINATIONS: DestinationCard[] = [
     weather: '28°C • Pleasant',
     difficulty: 'Easy',
     tags: ['Heritage', 'Boulders', 'Architecture', 'Culture'],
+    overview: 'The capital of the historic Vijayanagara Empire, sprawling across 4,100 hectares of granite boulders and ancient Dravidian temple monuments along the Tungabhadra River.',
+    topAttractions: ['Virupaksha Temple', 'Vijaya Vittala Stone Chariot', 'Matanga Hill Sunrise', 'Coracle Ferry Ride', 'Anegundi Village'],
+    localFoodSpecialties: ['North Karnataka Jolada Rotti Oota', 'Fresh Coconut Water', 'Bisi Bele Bath', 'Crisp Banana Flower Vada'],
+    culturalEtiquette: [
+      'Dress respectfully with covered shoulders and knees at all active sanctum shrines.',
+      'Do not climb or deface protected archeological masonry.',
+      'Alcohol and narcotics are strictly forbidden across temple premises.',
+    ],
+    safetyNotes: [
+      'Granite boulders heat up by midday; start hill climbs at 06:00 AM.',
+      'Wear sturdy rubber-soled footwear for boulder trails.',
+    ],
   },
   {
     id: 'gokarna',
@@ -319,6 +375,17 @@ export const DESTINATIONS: DestinationCard[] = [
     weather: '26°C • Sea Breeze',
     difficulty: 'Moderate',
     tags: ['Beaches', 'Cliff Treks', 'Sunset', 'Relaxation'],
+    overview: 'A tranquil Arabian Sea pilgrimage haven turned backpacker favorite, featuring 5 crescent beaches separated by rugged laterite cliffs.',
+    topAttractions: ['Kudle Beach', 'Om Beach Cliff View', 'Half Moon Bay', 'Paradise Beach Trek', 'Mahabaleshwar Temple'],
+    localFoodSpecialties: ['Konkani Kokum Sherbet', 'Goli Baje & Filter Coffee', 'Fresh Banana Pancakes', 'Avocado Salads'],
+    culturalEtiquette: [
+      'Observe peace and calm around sacred temple lanes in Main Town.',
+      'Pack out all trash from secluded cliff trails (Half Moon & Paradise).',
+    ],
+    safetyNotes: [
+      'High tide along rocky headlands can be dangerous; finish treks before sunset.',
+      'Keep offline GPS active for unpaved forest trails.',
+    ],
   },
   {
     id: 'ooty',
@@ -333,5 +400,114 @@ export const DESTINATIONS: DestinationCard[] = [
     weather: '14°C • Crisp Fog',
     difficulty: 'Easy',
     tags: ['Toy Train', 'Mist', 'Lakes', 'Pine Forest'],
+    overview: 'Queen of the Nilgiri hills with historic steam railways, botanical terraced gardens, fragrant eucalyptus groves, and the indigenous Toda tribal culture.',
+    topAttractions: ['Nilgiri Mountain Railway', 'Avalanche Emerald Lake', 'Doddabetta Peak (2,637m)', 'Pine Forest Trails', 'Toda Tribal Hamlets'],
+    localFoodSpecialties: ['Handmade Nilgiri Dark Chocolate', 'Hot Eucalyptus Spiced Tea', 'South Indian Filter Coffee & Dosas'],
+    culturalEtiquette: [
+      'Respect Toda sacred dairy temples (Munds); photography requires permission.',
+      'Strict plastic ban enforced across Nilgiris district.',
+    ],
+    safetyNotes: [
+      'Night driving on Kalhatty Ghat 36-hairpin pass is restricted for private vehicles; use daytime hours.',
+      'Temperatures drop to 8°C in winter; pack thermal woolens.',
+    ],
+  },
+  {
+    id: 'spiti',
+    title: 'Spiti Valley Cold Desert',
+    subtitle: 'Key Monastery, high mountain passes & fossil villages',
+    state: 'Himachal Pradesh',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBEiBuvW_MqMSkp5gcSuDtOvUmW3SHn5df6_RFwIIlrxetNSMvcDJcNefnjA3YYR-ePTXuoXwbZMfquXHSsVFbJaDm1Na9AkQ0MvFxf9k15LFzVyIoSXXxQY3asqAFOy62b2z0NQ7tScsEoAS5Y5nhBfdDP9DpDLoo1HcUjfqFwfh_PooM6DQAxieQurmuDj28eGToxFJd3OrAGymsgXKa8SXdb_vMxYtBcKxLj4izczLz3JL8_fqS1',
+    rating: 4.9,
+    dailyBudget: 2200,
+    bestSeason: 'Jun – Oct',
+    duration: '7 Days',
+    weather: '12°C • High UV',
+    difficulty: 'Challenging',
+    tags: ['High Altitude', 'Monasteries', 'Stargazing', 'Adventure'],
+    overview: 'A high-altitude cultural sanctuary wedged between India and Tibet, surrounded by snow-dusted 6,000m peaks, ancient Buddhist chortens, and the highest post office on earth.',
+    topAttractions: ['Key Gompa', 'Hikkim Highest Post Office', 'Kaza Old Bazaar', 'Chandratal Moon Lake', 'Dhankar Fort'],
+    localFoodSpecialties: ['Steamed Veg Momos & Thukpa', 'Butter Salt Tea', 'Sea Buckthorn Juice', 'Tingmo Tibetan Bread'],
+    culturalEtiquette: [
+      'Always walk clockwise around Buddhist stupas, mani stones, and prayer wheels.',
+      'Remove shoes inside monastic prayer halls.',
+    ],
+    safetyNotes: [
+      'Acute Mountain Sickness (AMS) risk above 3,500m; spend 2 full days acclimatizing at Kaza.',
+      'Carry Diamox, hydration salts, and offline topomaps due to zero cellular connectivity.',
+    ],
+  },
+  {
+    id: 'varanasi',
+    title: 'Varanasi Sacred Ghats',
+    subtitle: 'Dawn boat rides, evening Ganga Aarti & silk alleys',
+    state: 'Uttar Pradesh',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCp26WEbyFPAqFvXaugNhOm9AaE0pueBCGDKQOIOlsLYoQk6PsRznLnuRwWW-2hPem3SAVXkfv3Rr3cmewCgHPuVZh2qLf7a-kyuThc-geM8Zro4AJxsdpLhqnrN-sgE3kj-m2Q4mRY2PMzUZeIjr1EtAQhRk0bebbQ-hJaYj_UXBoC5H5y8bvzUJMxbJZxwkaKDhWlNYK6vC06-5T_KqBX6sj884VbU0yDV11J_YhC_nuhqKMn4a5O',
+    rating: 4.9,
+    dailyBudget: 1200,
+    bestSeason: 'Oct – Mar',
+    duration: '3 Days',
+    weather: '24°C • Dry',
+    difficulty: 'Easy',
+    tags: ['Spiritual', 'Culture', 'Ghats', 'Heritage'],
+    overview: 'One of the oldest continuously inhabited cities in human history, Varanasi pulses with sacred temple bells, dawn Vedic chants on the Ganga, and labyrinthine silk-weaving alleys.',
+    topAttractions: ['Dashashwamedh Ghat Aarti', 'Assi Ghat Morning Yoga', 'Kashi Vishwanath Corridor', 'Sarnath Buddhist Park', 'Manikarnika Observance'],
+    localFoodSpecialties: ['Banarasi Kachori Sabzi', 'Malaiyo Foam Saffron Sweet', 'Blue Lassi', 'Tamatar Chaat'],
+    culturalEtiquette: [
+      'No photography at cremation ghats (Manikarnika & Harishchandra) out of respect for grieving families.',
+      'Maintain solemn reverence during evening Aarti recitations.',
+    ],
+    safetyNotes: [
+      'Be alert in narrow bazaar alleys for livestock and rickshaws.',
+      'Only drink bottled or filtered water.',
+    ],
+  },
+];
+
+export interface CuratedCircuit {
+  id: string;
+  title: string;
+  badge: string;
+  duration: string;
+  route: string;
+  image: string;
+  groupCost: string;
+  perPerson: string;
+  highlight: string;
+}
+
+export const CURATED_CIRCUITS: CuratedCircuit[] = [
+  {
+    id: 'circ-1',
+    title: 'Western Ghats Monsoon Circuit',
+    badge: 'EPIC MONSOON ODYSSEY',
+    duration: '7 Days • 4 Stops',
+    route: 'Munnar → Wayanad → Coorg → Chikmagalur',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCp26WEbyFPAqFvXaugNhOm9AaE0pueBCGDKQOIOlsLYoQk6PsRznLnuRwWW-2hPem3SAVXkfv3Rr3cmewCgHPuVZh2qLf7a-kyuThc-geM8Zro4AJxsdpLhqnrN-sgE3kj-m2Q4mRY2PMzUZeIjr1EtAQhRk0bebbQ-hJaYj_UXBoC5H5y8bvzUJMxbJZxwkaKDhWlNYK6vC06-5T_KqBX6sj884VbU0yDV11J_YhC_nuhqKMn4a5O',
+    groupCost: '₹14,500 Total',
+    perPerson: '₹2,416 / head',
+    highlight: 'Tea estates, coffee mist, Shola waterfalls & jeep passes',
+  },
+  {
+    id: 'circ-2',
+    title: 'Golden Triangle & Desert Forts',
+    badge: 'HERITAGE VOYAGE',
+    duration: '6 Days • 3 Cities',
+    route: 'Delhi → Agra → Jaipur → Pushkar',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBEiBuvW_MqMSkp5gcSuDtOvUmW3SHn5df6_RFwIIlrxetNSMvcDJcNefnjA3YYR-ePTXuoXwbZMfquXHSsVFbJaDm1Na9AkQ0MvFxf9k15LFzVyIoSXXxQY3asqAFOy62b2z0NQ7tScsEoAS5Y5nhBfdDP9DpDLoo1HcUjfqFwfh_PooM6DQAxieQurmuDj28eGToxFJd3OrAGymsgXKa8SXdb_vMxYtBcKxLj4izczLz3JL8_fqS1',
+    groupCost: '₹16,800 Total',
+    perPerson: '₹2,800 / head',
+    highlight: 'Taj Mahal at sunrise, Amer Fort, Hawa Mahal & desert stepwells',
+  },
+  {
+    id: 'circ-3',
+    title: 'Konkan Coastal Paradise Trail',
+    badge: 'BEACH & CLIFF TRAIL',
+    duration: '5 Days • 3 Stops',
+    route: 'Gokarna → Murudeshwar → Udupi → Mangalore',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCYXpwGe7NatdmCY1qE9TCd0yg-5eb4j5MP7mlal3F9YSXegm_cQGKjnBkJu8Sr0zryuQlnw7vVuiZDTVV8LvHt3BQo4n3bFkKLnEbZ60Bp8-YAANLuozk06VvfHaIQLPfLt8ZnkOkSCiF9x4GrLOxn2Kbl9a897nvwuTD7iccRQCilGQveiNMzyjI6NeL4CTZXLE1fcmkmYXwuD_TWpFrLlA5dTMIx563RrDQgH7G4USVQUTvl03xP',
+    groupCost: '₹11,200 Total',
+    perPerson: '₹1,866 / head',
+    highlight: 'Cliff walks, sea caves, temple towns & authentic Konkani thalis',
   },
 ];

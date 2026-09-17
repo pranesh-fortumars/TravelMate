@@ -273,7 +273,7 @@ export const HomeView: React.FC = () => {
           </button>
 
           <button
-            onClick={() => setActiveTab('3dmap')}
+            onClick={() => setActiveTab('map3d')}
             className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-[#202a3e] text-[#d9e2fd] hover:bg-[#30394e] shrink-0 transition-all active:scale-95 shadow-sm border border-white/5"
           >
             <span>🗺️</span>
